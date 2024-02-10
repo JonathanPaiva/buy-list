@@ -42,4 +42,14 @@ class Product extends Model
         $product->delete();
     }
 
+    public function category ()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function productsListings()
+    {
+        return $this->hasMany(ProductListing::class);
+    }
+
 }

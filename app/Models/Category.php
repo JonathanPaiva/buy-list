@@ -41,4 +41,9 @@ class Category extends Model
         $category->delete();
     }
 
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
 }
