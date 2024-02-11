@@ -31,10 +31,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    
+    Route::get('/categories',[CategoryController::class,'index'])->name('categories.index');
+    Route::get('/categories/create',[CategoryController::class,'create'])->name('categories.create');
+    Route::post('/categories',[CategoryController::class,'store'])->name('categories.store');
+    Route::delete('/categories/{id}',[CategoryController::class,'delete'])->name('categories.delete');
 
     Route::get('/products',[ProductController::class,'index'])->name('products.index');
-
-    Route::get('/categories',[CategoryController::class,'index'])->name('categories.index');
 
     Route::get('/listings',[ListingController::class,'index'])->name('listings.index');
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -21,12 +22,12 @@ class CategoryController extends Controller
 
     public function create()
     {
-        //
+        return view('site.categories.create');
     }
 
-    public function store(StoreCategoryRequest $request)
+    public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     public function edit(Category $category)
