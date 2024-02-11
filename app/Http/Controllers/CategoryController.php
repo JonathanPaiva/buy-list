@@ -8,11 +8,15 @@ use App\Http\Requests\UpdateCategoryRequest;
 
 class CategoryController extends Controller
 {
-    public function index()
+    public function index(Category $category)
     {
-        $categories = Category::all();
-
-        return $categories;
+        $categories = $category->all();
+        //dd($catetories);
+        
+        return view('site.categories.index',['categories' => $categories]);
+        /* Pode ser utilizado também dessa forma no lugar do array:
+        compact('categories')
+        */
     }
 
     public function create()

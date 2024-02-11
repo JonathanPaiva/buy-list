@@ -17,7 +17,7 @@ class Category extends Model
 
     public static function createRegister($categoryRequest):void {
 
-        $contact = Category::create($categoryRequest);
+        $category = Category::create($categoryRequest);
     }
 
     public static function getById($id) : Category {

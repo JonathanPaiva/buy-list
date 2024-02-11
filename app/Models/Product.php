@@ -18,7 +18,7 @@ class Product extends Model
 
     public static function createRegister($productRequest):void {
 
-        $contact = Product::create($productRequest);
+        $product = Product::create($productRequest);
     }
 
     public static function getById($id) : Product {

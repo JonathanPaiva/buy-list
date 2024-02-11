@@ -19,30 +19,30 @@ class ProductListing extends Model
         'checked'
     ];
 
-    public static function createRegister($productlistingRequest):void {
+    public static function createRegister($productListingRequest):void {
 
-        $productlisting = ProductListing::create($productlistingRequest);
+        $productListing = ProductListing::create($productListingRequest);
     }
 
     public static function getById($id) : ProductListing {
 
-        $productlisting = ProductListing::findOrFail($id);
+        $productListing = ProductListing::findOrFail($id);
 
-        return $productlisting;
+        return $productListing;
     }
 
-    public static function editRegister($productlistingRequest) : void {
+    public static function editRegister($productListingRequest) : void {
 
-        $productlisting = self::getById($productlistingRequest->id);
+        $productListing = self::getById($productListingRequest->id);
 
-        $productlisting->update($productlistingRequest->all());
+        $productListing->update($productListingRequest->all());
     }
 
     public static function deleteRegister($id) : void {
 
-        $productlisting = self::getById($id);
+        $productListing = self::getById($id);
 
-        $productlisting->delete();
+        $productListing->delete();
     }
 
     public function listing()
