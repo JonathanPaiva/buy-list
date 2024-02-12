@@ -15,27 +15,27 @@ class Category extends Model
         'name'
     ];
 
-    public static function createRegister($categoryRequest):void {
-
+    public static function createRegister($categoryRequest):void 
+    {
         $category = Category::create($categoryRequest);
     }
 
-    public static function getById($id) : Category {
-
-        $category = Category::findOrFail($id);
+    public static function getById($id) 
+    {
+        $category = Category::find($id);
 
         return $category;
     }
 
-    public static function editRegister($categoryRequest) : void {
-
+    public static function editRegister($categoryRequest) : void 
+    {
         $category = self::getById($categoryRequest->id);
 
         $category->update($categoryRequest->all());
     }
 
-    public static function deleteRegister($id) : void {
-
+    public static function deleteRegister($id) : void 
+    {
         $category = self::getById($id);
 
         $category->delete();

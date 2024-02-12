@@ -1,4 +1,12 @@
-<h2>Categorias - Criar</h2>
+<h2>Categorias - Novo</h2>
+
+<div>
+    <a href="{{ route('categories')}}">
+        Voltar
+    </a>
+</div>
+
+<br>
 
 <form action="{{ route('categories.store') }}" method="POST">
     @csrf

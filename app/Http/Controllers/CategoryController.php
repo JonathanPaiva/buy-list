@@ -3,15 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Http\Requests\StoreCategoryRequest;
-use App\Http\Requests\UpdateCategoryRequest;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function index(Category $category)
+    public function index()
     {
-        $categories = $category->all();
+        $categories = Category::all();
         //dd($catetories);
         
         return view('site.categories.index',['categories' => $categories]);
@@ -25,23 +23,41 @@ class CategoryController extends Controller
         return view('site.categories.create');
     }
 
-    public function store(Request $request)
+    public function store(Request $request, Category $category)
     {
-        dd($request->all());
+        $category->createRegister($request->all());
+
+        return redirect()->route('categories');
     }
 
-    public function edit(Category $category)
+    public function edit($id)
     {
-        //
+        if ( !$category = Category::getById($id) ) {
+            return redirect()->route('categories');
+        }
+
+        return view('site.categories.edit', compact('category'));
     }
 
-    public function update(UpdateCategoryRequest $request, Category $category)
+    public function update(Request $request, $id)
     {
-        //
+        if ( !$category = Category::getById($id) ) {
+            return redirect()->route('categories');
+        }
+
+        $category->update($request->all());
+
+        return redirect()->route('categories');
     }
 
-    public function destroy(Category $category)
+    public function destroy($id)
     {
-        //
+        if ( !$category = Category::getById($id) ) {
+            return redirect()->route('categories');
+        }
+
+        Category::deleteRegister($id);
+        
+        return redirect()->route('categories');
     }
 }

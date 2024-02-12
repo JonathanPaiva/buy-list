@@ -32,16 +32,18 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
-    Route::get('/categories',[CategoryController::class,'index'])->name('categories.index');
+    Route::get('/categories',[CategoryController::class,'index'])->name('categories');
+    Route::get('/categories/{id}/edit',[CategoryController::class,'edit'])->name('categories.edit');
+    Route::put('/categories/{id}',[CategoryController::class,'update'])->name('categories.update');
     Route::get('/categories/create',[CategoryController::class,'create'])->name('categories.create');
     Route::post('/categories',[CategoryController::class,'store'])->name('categories.store');
-    Route::delete('/categories/{id}',[CategoryController::class,'delete'])->name('categories.delete');
+    Route::delete('/categories/{id}',[CategoryController::class,'destroy'])->name('categories.destroy');
 
-    Route::get('/products',[ProductController::class,'index'])->name('products.index');
+    Route::get('/products',[ProductController::class,'index'])->name('products');
 
-    Route::get('/listings',[ListingController::class,'index'])->name('listings.index');
+    Route::get('/listings',[ListingController::class,'index'])->name('listings');
 
-    Route::get('/products-listings',[ProductListingController::class,'index'])->name('products-listings.index');
+    Route::get('/products-listings',[ProductListingController::class,'index'])->name('products-listings');
 });
 
 require __DIR__.'/auth.php';
