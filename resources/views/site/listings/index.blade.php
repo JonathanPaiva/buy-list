@@ -1,5 +1,13 @@
 <h1>Listas</h1>
 
+<div>
+    <a href="{{ route('listings.create')}}">
+        Nova Listagem
+    </a>
+</div>
+
+<br>
+
 <table>
     <thead>
         <th>Id:</th>
@@ -18,9 +26,13 @@
                 <td>{{ $listing->completed }}</td>
                 <td>{{ $listing->completed_date }}</td>
                 <td>
-                    <div>
-                        <button>Editar</button>
-                        <button>Excluir</button>
+                    <div class="">
+                        <form action="{{ route('listings.destroy', $listing->id) }}" method="post">
+                            @csrf()
+                            @method('DELETE')
+                            <a href="{{ route('listings.edit', $listing->id) }}">Editar</a>
+                            <button type="submit">Excluir</button>
+                        </form>
                     </div>
                 </td>
             </tr>

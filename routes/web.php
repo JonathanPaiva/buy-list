@@ -42,6 +42,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/products',[ProductController::class,'index'])->name('products');
 
     Route::get('/listings',[ListingController::class,'index'])->name('listings');
+    Route::get('/listings/{id}/edit',[ListingController::class,'edit'])->name('listings.edit');
+    Route::put('/listings/{id}',[ListingController::class,'update'])->name('listings.update');
+    Route::get('/listings/create',[ListingController::class,'create'])->name('listings.create');
+    Route::post('/listings',[ListingController::class,'store'])->name('listings.store');
+    Route::delete('/listings/{id}',[ListingController::class,'destroy'])->name('listings.destroy');
 
     Route::get('/products-listings',[ProductListingController::class,'index'])->name('products-listings');
 });

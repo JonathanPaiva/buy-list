@@ -17,30 +17,30 @@ class Listing extends Model
         'completed_date'
     ];
 
-    public static function createRegister($listRequest):void {
+    public static function createRegister($listingRequest):void {
 
-        $list = Listing::create($listRequest);
+        $listing = Listing::create($listingRequest);
     }
 
-    public static function getById($id) : Listing {
+    public static function getById($id) {
 
-        $list = Listing::findOrFail($id);
+        $listing = Listing::findOrFail($id);
 
-        return $list;
+        return $listing;
     }
 
-    public static function editRegister($listRequest) : void {
+    public static function editRegister($listingRequest) : void {
 
-        $list = self::getById($listRequest->id);
+        $listing = self::getById($listingRequest->id);
 
-        $list->update($listRequest->all());
+        $listing->update($listingRequest->all());
     }
 
     public static function deleteRegister($id) : void {
 
-        $list = self::getById($id);
+        $listing = self::getById($id);
 
-        $list->delete();
+        $listing->delete();
     }
 
     public function productsListings()
