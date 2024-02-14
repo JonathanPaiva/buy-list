@@ -15,18 +15,15 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/home', function () {
-    return view('site.home');
+Route::get('/', function () {
+    return view('site.layouts.app');
 })->middleware(['auth', 'verified'])->name('home');
 
-Route::get('/home2', function () {
-    return view('site.home2');
-})->middleware(['auth', 'verified'])->name('home2');
+Route::get('/home', function () {
+    return view('site.layouts.app');
+})->middleware(['auth', 'verified'])->name('home');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', function(){
-        return view('dashboard');
-    });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
