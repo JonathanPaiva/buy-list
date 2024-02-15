@@ -2,16 +2,18 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Listing;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class UpdateListingRequest extends FormRequest
+class StoreUpdateListingRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +24,11 @@ class UpdateListingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => [
+                'required', 
+                'min:3', 
+                'max:255', 
+                Rule::unique(Listing::class)->where('deleted_at',null)],
         ];
     }
 }

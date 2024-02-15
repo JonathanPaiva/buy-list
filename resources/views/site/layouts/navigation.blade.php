@@ -7,13 +7,13 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="{{ route('home') }}">Home</a>
+                <a class="nav-link @if (request()->routeIs(['home',''])) active @endif" aria-current="page" href="{{ route('home') }}">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ route('categories') }}">Categorias</a>
+                <a class="nav-link @if (request()->routeIs('categories*')) active @endif" href="{{ route('categories') }}">Categorias</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ route('listings') }}">Listagens</a>
+                <a class="nav-link @if (request()->routeIs('listings*')) active @endif" href="{{ route('listings') }}">Listagens</a>
               </li>
               <li class="nav-item text-center ">
                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>

@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUpdateListingRequest;
 use App\Models\Listing;
-use App\Http\Requests\StoreListingRequest;
-use App\Http\Requests\UpdateListingRequest;
-use Illuminate\Http\Request;
 
 class ListingController extends Controller
 {
@@ -21,7 +19,7 @@ class ListingController extends Controller
         return view('site.listings.create');
     }
 
-    public function store(Request $request, Listing $listing)
+    public function store(StoreUpdateListingRequest $request, Listing $listing)
     {
         $listing->createRegister($request->all());
 
@@ -37,7 +35,7 @@ class ListingController extends Controller
         return view('site.listings.edit', compact('listing'));
     }
 
-    public function update(Request $request, $id)
+    public function update(StoreUpdateListingRequest $request, $id)
     {
         if ( !$listing = Listing::getById($id) ) {
             return redirect()->route('listing');

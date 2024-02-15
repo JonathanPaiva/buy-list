@@ -14,10 +14,12 @@
 
     <br>
 
+    @include('site.error')
+
     <form action="{{ route('categories.store') }}" method="POST">
         @csrf
         <label for="name" class="form-label">Categoria:</label>
-        <input class="form-control" type="text" placeholder="Categoria" name="name">
+        <input class="form-control" type="text" placeholder="Categoria" name="name" value="{{ old('name') }}">
         <button type="submit">Salvar</button>
     </form>
 

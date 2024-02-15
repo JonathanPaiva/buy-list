@@ -20,7 +20,7 @@ Route::get('/', function () {
 })->middleware(['auth', 'verified'])->name('home');
 
 Route::get('/home', function () {
-    return view('site.layouts.app');
+    return view('site.home');
 })->middleware(['auth', 'verified'])->name('home');
 
 Route::middleware('auth')->group(function () {

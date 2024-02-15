@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <h1>Listas</h1>
+    <h2>Listas</h2>
 
     <div>
         <a href="{{ route('listings.create')}}">

@@ -14,6 +14,8 @@
 
     <br>
 
+    @include('site.error')
+
     <form action="{{ route('listings.update', $listing->id) }}" method="POST">
         @csrf
         @method('PUT')
