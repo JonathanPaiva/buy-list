@@ -23,12 +23,24 @@ class CategoriaRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'nome' => [
-                'required', 
-                'min:3', 
-                'max:255', 
-                Rule::unique(Categoria::class)->where('deleted_at',null)],
+        if ($this->method() === 'PUT' or 'PATCH') {
+            $rules = [
+                'nome' => [
+                    'required', 
+                    'min:3', 
+                    'max:255', 
+                    Rule::unique(Categoria::class)->ignore($this->id)]
         ];
+        } else {
+            $rules = [
+                'nome' => [
+                    'required', 
+                    'min:3', 
+                    'max:255', 
+                    Rule::unique(Categoria::class)->where('deleted_at',null)->ignore($this->id)],
+            ];
+        }
+
+        return $rules;
     }
 }

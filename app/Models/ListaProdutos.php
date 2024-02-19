@@ -20,12 +20,12 @@ class ListaProduto extends Model
         'confirmado'
     ];
 
-    public function listing()
+    public function lista()
     {
         return $this->belongsTo(Lista::class);
     }
 
-    public function product()
+    public function produto()
     {
         return $this->belongsTo(Produto::class);
     }

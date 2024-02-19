@@ -16,38 +16,12 @@ class Produto extends Model
         'categoria_id'
     ];
 
-    public static function createRegister($produtoRequest):void {
-
-        $produto = Produto::create($produtoRequest);
-    }
-
-    public static function getById(int $id) : Produto {
-
-        $produto = Produto::findOrFail($id);
-
-        return $produto;
-    }
-
-    public static function editRegister($produtoRequest) : void {
-
-        $produto = self::getById($produtoRequest->id);
-
-        $produto->update($produtoRequest->all());
-    }
-
-    public static function deleteRegister(int $id) : void {
-
-        $Produto = self::getById($id);
-
-        $Produto->delete();
-    }
-
-    public function category ()
+    public function categoria ()
     {
         return $this->belongsTo(Categoria::class);
     }
 
-    public function ProdutosListings()
+    public function listasprodutos()
     {
         return $this->hasMany(ListaProduto::class);
     }

@@ -23,12 +23,24 @@ class ListaRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'nome' => [
-                'required', 
-                'min:3', 
-                'max:255', 
-                Rule::unique(Lista::class)->where('deleted_at',null)],
-        ];
+        if ($this->method() === 'PUT' or 'PATCH') {
+            $rules = [
+                'nome' => [
+                    'required', 
+                    'min:3', 
+                    'max:255', 
+                    Rule::unique(Lista::class)->ignore($this->id)],
+            ];
+        } else {
+            $rules = [
+                'nome' => [
+                    'required', 
+                    'min:3', 
+                    'max:255', 
+                    Rule::unique(Lista::class)->where('deleted_at',null)],
+            ];
+        }
+
+        return $rules;
     }
 }
