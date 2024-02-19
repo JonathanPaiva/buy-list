@@ -2,11 +2,11 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Lista;
+use App\Models\Produto;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class ListaRequest extends FormRequest
+class ProdutoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,16 +29,25 @@ class ListaRequest extends FormRequest
                     'required', 
                     'min:3', 
                     'max:255', 
-                    Rule::unique(Lista::class)->ignore($this->id)],
+                    Rule::unique(Produto::class)->ignore($this->id)
+                ],
+                'categoria_id' => [
+                    'required',
+                    'integer'
+                ],
             ];
         } 
-            
+
         $rules = [
             'nome' => [
                 'required', 
                 'min:3', 
                 'max:255', 
-                Rule::unique(Lista::class)->where('deleted_at',null)
+                Rule::unique(Produto::class)->where('deleted_at',null)
+            ],
+            'categoria_id' => [
+                'required',
+                'integer'
             ],
         ];
 

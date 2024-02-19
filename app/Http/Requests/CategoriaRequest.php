@@ -30,16 +30,17 @@ class CategoriaRequest extends FormRequest
                     'min:3', 
                     'max:255', 
                     Rule::unique(Categoria::class)->ignore($this->id)]
-        ];
-        } else {
-            $rules = [
-                'nome' => [
-                    'required', 
-                    'min:3', 
-                    'max:255', 
-                    Rule::unique(Categoria::class)->where('deleted_at',null)->ignore($this->id)],
             ];
         }
+
+        $rules = [
+            'nome' => [
+                'required', 
+                'min:3', 
+                'max:255', 
+                Rule::unique(Categoria::class)->where('deleted_at',null)
+            ],
+        ];
 
         return $rules;
     }

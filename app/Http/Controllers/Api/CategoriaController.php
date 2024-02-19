@@ -18,9 +18,9 @@ class CategoriaController extends Controller
 
     public function index()
     {
-        $data = $this->categoriaRepository->paginate();
+        $dados = $this->categoriaRepository->paginate();
         
-        return CategoriaResource::collection($data);
+        return CategoriaResource::collection($dados);
     }
 
     public function store(CategoriaRequest $request, int $id = 0)
@@ -56,6 +56,6 @@ class CategoriaController extends Controller
 
         $categoria->delete();
 
-        return response()->json([], Response::HTTP_NO_CONTENT());
+        return response()->json([], Response::HTTP_NO_CONTENT);
     }
 }

@@ -18,9 +18,9 @@ class ListaController extends Controller
 
     public function index()
     {
-        $data = $this->listaRepository->paginate();
+        $dados = $this->listaRepository->paginate();
         
-        return ListaResource::collection($data);
+        return ListaResource::collection($dados);
     }
 
     public function store(ListaRequest $request, int $id = 0)
@@ -56,6 +56,6 @@ class ListaController extends Controller
 
         $lista->delete();
 
-        return response()->json([], Response::HTTP_NO_CONTENT());
+        return response()->json([], Response::HTTP_NO_CONTENT);
     }
 }

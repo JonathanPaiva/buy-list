@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\CategoriaController;
 use App\Http\Controllers\Api\ListaController;
+use App\Http\Controllers\Api\ProdutoController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -39,3 +40,10 @@ Route::post('/listas',[ListaController::class,'store']);
 Route::get('/listas/{id}',[ListaController::class,'show']);
 Route::put('/listas/{id}',[ListaController::class,'store']);
 Route::delete('/listas/{id}', [ListaController::class,'destroy']);
+
+//Route::apiResource('produtos', ProdutoController::class);
+Route::get('/produtos',[ProdutoController::class,'index']);
+Route::post('/produtos',[ProdutoController::class,'store']);
+Route::get('/produtos/{id}',[ProdutoController::class,'show']);
+Route::put('/produtos/{id}',[ProdutoController::class,'store']);
+Route::delete('/produtos/{id}', [ProdutoController::class,'destroy']);
