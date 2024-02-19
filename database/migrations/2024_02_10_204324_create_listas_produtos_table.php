@@ -6,33 +6,31 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+
     public function up(): void
     {
-        Schema::create('products_listings', function (Blueprint $table) {
+        Schema::create('listas_produtos', function (Blueprint $table) {
             $table->id();
             
-            $table->foreignId('listing_id')
-                ->constrained('listings')
+            $table->foreignId('lista_id')
+                ->constrained('listas')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             
-            $table->foreignId('product_id')
-                ->constrained('products')
+            $table->foreignId('produto_id')
+                ->constrained('produtos')
                 ->restrictOnDelete()
                 ->cascadeOnUpdate();
             
-            $table->integer('quantity')
+            $table->integer('quantidade')
                 ->default(1)
                 ->nullable(false);
             
-            $table->float('price',8,2)
+            $table->float('preco',8,2)
                 ->default(0)
                 ->nullable(false);
 
-            $table->boolean('checked')
+            $table->boolean('confirmado')
                 ->default(false);
 
             $table->timestamps();
@@ -41,11 +39,8 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('products_listings');
+        Schema::dropIfExists('listas_produtos');
     }
 };

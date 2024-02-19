@@ -6,32 +6,28 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('listas', function (Blueprint $table) {
             $table->id();
             
-            $table->string('name', 100)
+            $table->string('nome', 100)
                 ->nullable(false);
             
-            $table->foreignId('category_id')
-                ->constrained('categories')
-                ->restrictOnDelete()
-                ->cascadeOnUpdate();
+            $table->boolean('finalizada')
+                ->default(false);
+            
+            $table->date('finalizada_data')
+                ->nullable(true);
             
             $table->timestamps();
             $table->softDeletes();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('listas');
     }
 };

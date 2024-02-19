@@ -2,16 +2,18 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Categoria;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class StoreUpdateProductRequest extends FormRequest
+class CategoriaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +24,11 @@ class StoreUpdateProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nome' => [
+                'required', 
+                'min:3', 
+                'max:255', 
+                Rule::unique(Categoria::class)->where('deleted_at',null)],
         ];
     }
 }
