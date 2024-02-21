@@ -23,10 +23,10 @@ class ProdutoController extends Controller
         return ProdutoResource::collection($dados);
     }
 
-    public function store(ProdutoRequest $request, int $id = 0)
+    public function store(ProdutoRequest $request, int $produto_id = 0)
     {
-        if ($id) {
-            if ( !$produto = $this->produtoRepository->findOrfail($id) ) {
+        if ($produto_id) {
+            if ( !$produto = $this->produtoRepository->findOrfail($produto_id) ) {
                 return Response::HTTP_NOT_FOUND();
             }
     
@@ -40,17 +40,17 @@ class ProdutoController extends Controller
         return new ProdutoResource($produto);
     }
 
-    public function show(int $id)
+    public function show(int $produto_id)
     {
-        if ( !$produto = $this->produtoRepository->findOrfail($id) ) {
+        if ( !$produto = $this->produtoRepository->findOrfail($produto_id) ) {
             return Response::HTTP_NOT_FOUND();
         }
         return new ProdutoResource($produto);
     }
 
-    public function destroy(int $id)
+    public function destroy(int $produto_id)
     {
-        if ( !$produto = $this->produtoRepository->findOrfail($id) ) {
+        if ( !$produto = $this->produtoRepository->findOrfail($produto_id) ) {
             return Response::HTTP_NOT_FOUND();
         }
 

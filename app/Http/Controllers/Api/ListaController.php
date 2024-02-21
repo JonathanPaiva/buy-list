@@ -23,10 +23,10 @@ class ListaController extends Controller
         return ListaResource::collection($dados);
     }
 
-    public function store(ListaRequest $request, int $id = 0)
+    public function store(ListaRequest $request, int $lista_id = 0)
     {
-        if ($id) {
-            if ( !$lista = $this->listaRepository->findOrfail($id) ) {
+        if ($lista_id) {
+            if ( !$lista = $this->listaRepository->findOrfail($lista_id) ) {
                 return Response::HTTP_NOT_FOUND();
             }
     
@@ -40,17 +40,17 @@ class ListaController extends Controller
         return new ListaResource($categoria);
     }
 
-    public function show(int $id)
+    public function show(int $lista_id)
     {
-        if ( !$lista = $this->listaRepository->findOrfail($id) ) {
+        if ( !$lista = $this->listaRepository->findOrfail($lista_id) ) {
             return Response::HTTP_NOT_FOUND();
         }
         return new ListaResource($lista);
     }
 
-    public function destroy(int $id)
+    public function destroy(int $lista_id)
     {
-        if ( !$lista = $this->listaRepository->findOrfail($id) ) {
+        if ( !$lista = $this->listaRepository->findOrfail($lista_id) ) {
             return Response::HTTP_NOT_FOUND();
         }
 

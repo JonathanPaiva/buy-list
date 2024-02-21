@@ -19,7 +19,8 @@ class ListaResource extends JsonResource
             'nome' => $this->nome,
             'finalizada' =>$this->finalizada,
             'finalizada_data' => $this->finalizada_data,
-            'created_at' => $this->created_at
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at
         ];
     }
 }
