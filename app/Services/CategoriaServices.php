@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Http\Requests\CategoriaRequest;
 use App\Models\Categoria;
-use Illuminate\Database\Eloquent\Collection;
 
 class CategoriaServices 
 {

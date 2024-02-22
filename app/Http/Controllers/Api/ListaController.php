@@ -5,56 +5,55 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ListaRequest;
 use App\Http\Resources\ListaResource;
-use App\Models\Lista;
+use App\Services\ListaServices;
 use Illuminate\Http\Response;
 
 class ListaController extends Controller
 {
 
-    public function __construct(protected Lista $listaRepository) 
+    public function __construct(protected ListaServices $listaServices) 
     { 
 
     }   
 
     public function index()
     {
-        $dados = $this->listaRepository->paginate();
+        $dadosListas = $this->listaServices->getAll();
         
-        return ListaResource::collection($dados);
+        return ListaResource::collection($dadosListas);
     }
 
-    public function store(ListaRequest $request, int $lista_id = 0)
+    public function store(ListaRequest $listaRequest, int $listaId = 0)
     {
-        if ($lista_id) {
-            if ( !$lista = $this->listaRepository->findOrfail($lista_id) ) {
-                return Response::HTTP_NOT_FOUND();
+        if ($listaId) {
+
+            if (!$listaId = $listaRequest->id) {
+                return Response::HTTP_NOT_FOUND;
             }
-    
-            $lista->update($request->validated());
+            
+            $lista = $this->listaServices->update($listaRequest, $listaId);
     
             return new ListaResource($lista);
         }
 
-        $categoria = $this->listaRepository->create($request->validated());
+        $lista = $this->listaServices->create($listaRequest);
 
-        return new ListaResource($categoria);
+        return new ListaResource($lista);
     }
 
-    public function show(int $lista_id)
+    public function show(int $listaId)
     {
-        if ( !$lista = $this->listaRepository->findOrfail($lista_id) ) {
-            return Response::HTTP_NOT_FOUND();
+        if ( !$lista = $this->listaServices->getById($listaId) ) {
+            return Response::HTTP_NOT_FOUND;
         }
         return new ListaResource($lista);
     }
 
-    public function destroy(int $lista_id)
+    public function destroy(int $listaId)
     {
-        if ( !$lista = $this->listaRepository->findOrfail($lista_id) ) {
-            return Response::HTTP_NOT_FOUND();
+        if ( !$this->listaServices->delete($listaId) ) {
+            return Response::HTTP_NOT_FOUND;
         }
-
-        $lista->delete();
 
         return response()->json([], Response::HTTP_NO_CONTENT);
     }

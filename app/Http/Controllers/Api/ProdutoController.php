@@ -5,53 +5,53 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProdutoRequest;
 use App\Http\Resources\ProdutoResource;
-use App\Models\Produto;
+use App\Services\ProdutoServices;
 use Illuminate\Http\Response;
 
 class ProdutoController extends Controller
 {
 
-    public function __construct(protected Produto $produtoRepository) 
+    public function __construct(protected ProdutoServices $produtoService) 
     { 
 
     }  
 
     public function index()
     {
-        $dados = $this->produtoRepository->paginate();
+        $dadosProdutos = $this->produtoService->getAll();
         
-        return ProdutoResource::collection($dados);
+        return ProdutoResource::collection($dadosProdutos);
     }
 
-    public function store(ProdutoRequest $request, int $produto_id = 0)
+    public function store(ProdutoRequest $produtoRequest, int $produtoId = 0)
     {
-        if ($produto_id) {
-            if ( !$produto = $this->produtoRepository->findOrfail($produto_id) ) {
-                return Response::HTTP_NOT_FOUND();
+        if ($produtoId) {
+            if ( !$produtoId = $produtoRequest->id ) {
+                return Response::HTTP_NOT_FOUND;
             }
     
-            $produto->update($request->validated());
+            $produto = $this->produtoService->update($produtoRequest, $produtoId);
     
             return new ProdutoResource($produto);
         }
 
-        $produto = $this->produtoRepository->create($request->validated());
+        $produto = $this->produtoService->create($produtoRequest);
 
         return new ProdutoResource($produto);
     }
 
-    public function show(int $produto_id)
+    public function show(int $produtoId)
     {
-        if ( !$produto = $this->produtoRepository->findOrfail($produto_id) ) {
-            return Response::HTTP_NOT_FOUND();
+        if ( !$produto = $this->produtoService->getById($produtoId) ) {
+            return Response::HTTP_NOT_FOUND;
         }
         return new ProdutoResource($produto);
     }
 
-    public function destroy(int $produto_id)
+    public function destroy(int $produtoId)
     {
-        if ( !$produto = $this->produtoRepository->findOrfail($produto_id) ) {
-            return Response::HTTP_NOT_FOUND();
+        if ( !$produto = $this->produtoService->getById($produtoId) ) {
+            return Response::HTTP_NOT_FOUND;
         }
 
         $produto->delete();

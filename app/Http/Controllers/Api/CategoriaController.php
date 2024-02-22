@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoriaRequest;
 use App\Http\Resources\CategoriaResource;
-use App\Models\Categoria;
 use App\Services\CategoriaServices;
 use Illuminate\Http\Response;
 
@@ -19,20 +18,20 @@ class CategoriaController extends Controller
 
     public function index()
     {
-        $dados = $this->categoriaService->getAll();
+        $dadosCategorias = $this->categoriaService->getAll();
         
-        return CategoriaResource::collection($dados);
+        return CategoriaResource::collection($dadosCategorias);
     }
 
-    public function store(CategoriaRequest $categoriaRequest, int $categoria_id = 0)
+    public function store(CategoriaRequest $categoriaRequest, int $categoriaId = 0)
     {
-        if ($categoria_id) {
+        if ($categoriaId) {
             
-            if (!$categoria_id = $categoriaRequest->id) {
+            if (!$categoriaId = $categoriaRequest->id) {
                 return Response::HTTP_NOT_FOUND;
             }
             
-            $categoria = $this->categoriaService->update($categoriaRequest, $categoria_id);
+            $categoria = $this->categoriaService->update($categoriaRequest, $categoriaId);
     
             return new CategoriaResource($categoria);
         }
@@ -42,17 +41,17 @@ class CategoriaController extends Controller
         return new CategoriaResource($categoria);
     }
 
-    public function show(int $categoria_id)
+    public function show(int $categoriaId)
     {
-        if ( !$categoria = $this->categoriaService->getById($categoria_id) ) {
+        if ( !$categoria = $this->categoriaService->getById($categoriaId) ) {
             return Response::HTTP_NOT_FOUND;
         }
         return new CategoriaResource($categoria);
     }
 
-    public function destroy(int $categoria_id)
+    public function destroy(int $categoriaId)
     {
-        if ( !$this->categoriaService->delete($categoria_id) ) {
+        if ( !$this->categoriaService->delete($categoriaId) ) {
             return Response::HTTP_NOT_FOUND;
         }
 
